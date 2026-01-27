@@ -1,0 +1,25 @@
+node_modules/
+dist/
+
+# Development files
+.claude/
+CLAUDE.md
+competition/
+package.dev.json
+pnpm-lock.dev.yaml
+SECURITY_ANALYSIS.md
+ui/src/performance-monitor.ts
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*

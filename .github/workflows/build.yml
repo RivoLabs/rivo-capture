@@ -1,0 +1,69 @@
+name: Build Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g., 1.0.0)'
+        required: true
+        default: '1.0.0'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Create release package
+        run: |
+          mkdir -p release/cfx-capture
+          cp -r dist/* release/cfx-capture/
+          cp fxmanifest.lua release/cfx-capture/
+          cp config.js release/cfx-capture/
+          cp README.md release/cfx-capture/
+          cp LICENSE release/cfx-capture/ 2>/dev/null || echo "MIT License" > release/cfx-capture/LICENSE
+          cd release
+          zip -r ../cfx-capture-v${{ github.event.inputs.version }}.zip cfx-capture
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cfx-capture-v${{ github.event.inputs.version }}
+          path: cfx-capture-v${{ github.event.inputs.version }}.zip
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ github.event.inputs.version }}
+          name: CFX-Capture v${{ github.event.inputs.version }}
+          files: cfx-capture-v${{ github.event.inputs.version }}.zip
+          body: |
+            ## CFX-Capture v${{ github.event.inputs.version }}
+
+            Production-ready screenshot and recording resource for FiveM.
+
+            ### Installation
+            1. Download `cfx-capture-v${{ github.event.inputs.version }}.zip`
+            2. Extract to your resources folder
+            3. Add `ensure cfx-capture` to server.cfg
+            4. Configure `config.js` with your API keys
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
