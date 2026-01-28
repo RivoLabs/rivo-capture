@@ -89,7 +89,7 @@ Override configuration at runtime without modifying files.
 Capture a screenshot from a player and receive the data on the server.
 
 ```lua
-exports['Straye Capture']:requestClientScreenshot(playerId, options, callback)
+exports['straye-capture']:requestClientScreenshot(playerId, options, callback)
 ```
 
 **Parameters**
@@ -109,7 +109,7 @@ exports['Straye Capture']:requestClientScreenshot(playerId, options, callback)
 
 **Example**
 ```lua
-exports['Straye Capture']:requestClientScreenshot(source, {
+exports['straye-capture']:requestClientScreenshot(source, {
     encoding = 'jpg',
     quality = 0.85,
     width = 1920,
@@ -126,7 +126,7 @@ end)
 
 **Example with file save**
 ```lua
-exports['Straye Capture']:requestClientScreenshot(source, {
+exports['straye-capture']:requestClientScreenshot(source, {
     fileName = 'evidence_' .. os.time() .. '.jpg'
 }, function(err, filePath)
     if not err then
@@ -142,7 +142,7 @@ end)
 Capture a screenshot and upload to an external provider through the server.
 
 ```lua
-exports['Straye Capture']:requestClientScreenshotUpload(playerId, provider, options, callback)
+exports['straye-capture']:requestClientScreenshotUpload(playerId, provider, options, callback)
 ```
 
 **Parameters**
@@ -162,7 +162,7 @@ exports['Straye Capture']:requestClientScreenshotUpload(playerId, provider, opti
 
 **Example**
 ```lua
-exports['Straye Capture']:requestClientScreenshotUpload(source, 'fivemanage', {
+exports['straye-capture']:requestClientScreenshotUpload(source, 'fivemanage', {
     encoding = 'jpg',
     quality = 0.9,
     metadata = {
@@ -180,7 +180,7 @@ end)
 
 **Example with Discord**
 ```lua
-exports['Straye Capture']:requestClientScreenshotUpload(source, 'discord', {
+exports['straye-capture']:requestClientScreenshotUpload(source, 'discord', {
     content = 'Screenshot from ' .. GetPlayerName(source)
 }, function(err, result)
     if not err then
@@ -196,7 +196,7 @@ end)
 Begin a video recording session for a player.
 
 ```lua
-exports['Straye Capture']:startRecording(playerId, options, callback)
+exports['straye-capture']:startRecording(playerId, options, callback)
 ```
 
 **Parameters**
@@ -213,7 +213,7 @@ exports['Straye Capture']:startRecording(playerId, options, callback)
 
 **Example**
 ```lua
-exports['Straye Capture']:startRecording(source, {
+exports['straye-capture']:startRecording(source, {
     recordingType = 'evidence',
     maxDuration = 60000,
     metadata = {
@@ -238,7 +238,7 @@ end)
 Query stored recordings with optional filters.
 
 ```lua
-local recordings = exports['Straye Capture']:getRecordings(filters)
+local recordings = exports['straye-capture']:getRecordings(filters)
 ```
 
 **Filters**
@@ -252,7 +252,7 @@ local recordings = exports['Straye Capture']:getRecordings(filters)
 
 **Example**
 ```lua
-local recordings = exports['Straye Capture']:getRecordings({
+local recordings = exports['straye-capture']:getRecordings({
     recordingType = 'evidence',
     limit = 10
 })
@@ -269,12 +269,12 @@ end
 Remove a recording by session ID.
 
 ```lua
-local deleted = exports['Straye Capture']:deleteRecording(sessionId)
+local deleted = exports['straye-capture']:deleteRecording(sessionId)
 ```
 
 **Example**
 ```lua
-local success = exports['Straye Capture']:deleteRecording('abc123def456')
+local success = exports['straye-capture']:deleteRecording('abc123def456')
 if success then
     print('Recording deleted')
 end
@@ -289,12 +289,12 @@ end
 Capture a screenshot on the client and receive the data locally.
 
 ```lua
-exports['Straye Capture']:requestScreenshot(options, callback)
+exports['straye-capture']:requestScreenshot(options, callback)
 ```
 
 **Example**
 ```lua
-exports['Straye Capture']:requestScreenshot({
+exports['straye-capture']:requestScreenshot({
     encoding = 'jpg',
     quality = 0.92
 }, function(data)
@@ -309,12 +309,12 @@ end)
 Capture a screenshot and upload through the server proxy.
 
 ```lua
-exports['Straye Capture']:requestScreenshotUpload(provider, options, callback)
+exports['straye-capture']:requestScreenshotUpload(provider, options, callback)
 ```
 
 **Example**
 ```lua
-exports['Straye Capture']:requestScreenshotUpload('fivemanage', {
+exports['straye-capture']:requestScreenshotUpload('fivemanage', {
     encoding = 'jpg'
 }, function(result)
     local data = json.decode(result)
@@ -333,7 +333,7 @@ end)
 All callbacks receive structured error information when something goes wrong.
 
 ```lua
-exports['Straye Capture']:requestClientScreenshot(source, {}, function(err, data)
+exports['straye-capture']:requestClientScreenshot(source, {}, function(err, data)
     if err then
         -- err is the error code string
         print('Error code:', err)
@@ -370,7 +370,7 @@ Straye Capture maintains compatibility with screenshot-basic.
 TriggerServerEvent('screenshot_basic:requestScreenshot', options, url)
 
 -- Legacy export alias
-exports['Straye Capture']:requestClientScreenshotLegacy(...)
+exports['straye-capture']:requestClientScreenshotLegacy(...)
 ```
 
 ---
