@@ -1,4 +1,4 @@
-# CFX-Capture
+# Straye Capture
 
 A screenshot and video recording resource for FiveM servers.
 
@@ -6,7 +6,7 @@ Built on the foundation of screenshot-basic by the CitizenFX team and screencapt
 
 ---
 
-## Why CFX-Capture
+## Why Straye Capture
 
 **Reliability.** A queue-based system processes requests sequentially, eliminating failures under concurrent load.
 
@@ -22,7 +22,7 @@ Built on the foundation of screenshot-basic by the CitizenFX team and screencapt
 
 1. Download the latest release
 2. Extract to your resources folder
-3. Add `ensure cfx-capture` to server.cfg
+3. Add `ensure straye-capture` to server.cfg
 4. Configure `config.js` with your provider API keys
 
 ---
@@ -41,7 +41,7 @@ const Config = {
     MaxHeight: 1080,
     MinIntervalMs: 500,
     UploadTimeoutMs: 30000,
-    OutputDir: "cache/cfx-capture",
+    OutputDir: "cache/Straye Capture",
 
     Providers: {
         fivemanage: {
@@ -89,7 +89,7 @@ Override configuration at runtime without modifying files.
 Capture a screenshot from a player and receive the data on the server.
 
 ```lua
-exports['cfx-capture']:requestClientScreenshot(playerId, options, callback)
+exports['Straye Capture']:requestClientScreenshot(playerId, options, callback)
 ```
 
 **Parameters**
@@ -109,7 +109,7 @@ exports['cfx-capture']:requestClientScreenshot(playerId, options, callback)
 
 **Example**
 ```lua
-exports['cfx-capture']:requestClientScreenshot(source, {
+exports['Straye Capture']:requestClientScreenshot(source, {
     encoding = 'jpg',
     quality = 0.85,
     width = 1920,
@@ -126,7 +126,7 @@ end)
 
 **Example with file save**
 ```lua
-exports['cfx-capture']:requestClientScreenshot(source, {
+exports['Straye Capture']:requestClientScreenshot(source, {
     fileName = 'evidence_' .. os.time() .. '.jpg'
 }, function(err, filePath)
     if not err then
@@ -142,7 +142,7 @@ end)
 Capture a screenshot and upload to an external provider through the server.
 
 ```lua
-exports['cfx-capture']:requestClientScreenshotUpload(playerId, provider, options, callback)
+exports['Straye Capture']:requestClientScreenshotUpload(playerId, provider, options, callback)
 ```
 
 **Parameters**
@@ -162,7 +162,7 @@ exports['cfx-capture']:requestClientScreenshotUpload(playerId, provider, options
 
 **Example**
 ```lua
-exports['cfx-capture']:requestClientScreenshotUpload(source, 'fivemanage', {
+exports['Straye Capture']:requestClientScreenshotUpload(source, 'fivemanage', {
     encoding = 'jpg',
     quality = 0.9,
     metadata = {
@@ -180,7 +180,7 @@ end)
 
 **Example with Discord**
 ```lua
-exports['cfx-capture']:requestClientScreenshotUpload(source, 'discord', {
+exports['Straye Capture']:requestClientScreenshotUpload(source, 'discord', {
     content = 'Screenshot from ' .. GetPlayerName(source)
 }, function(err, result)
     if not err then
@@ -196,7 +196,7 @@ end)
 Begin a video recording session for a player.
 
 ```lua
-exports['cfx-capture']:startRecording(playerId, options, callback)
+exports['Straye Capture']:startRecording(playerId, options, callback)
 ```
 
 **Parameters**
@@ -213,7 +213,7 @@ exports['cfx-capture']:startRecording(playerId, options, callback)
 
 **Example**
 ```lua
-exports['cfx-capture']:startRecording(source, {
+exports['Straye Capture']:startRecording(source, {
     recordingType = 'evidence',
     maxDuration = 60000,
     metadata = {
@@ -238,7 +238,7 @@ end)
 Query stored recordings with optional filters.
 
 ```lua
-local recordings = exports['cfx-capture']:getRecordings(filters)
+local recordings = exports['Straye Capture']:getRecordings(filters)
 ```
 
 **Filters**
@@ -252,7 +252,7 @@ local recordings = exports['cfx-capture']:getRecordings(filters)
 
 **Example**
 ```lua
-local recordings = exports['cfx-capture']:getRecordings({
+local recordings = exports['Straye Capture']:getRecordings({
     recordingType = 'evidence',
     limit = 10
 })
@@ -269,12 +269,12 @@ end
 Remove a recording by session ID.
 
 ```lua
-local deleted = exports['cfx-capture']:deleteRecording(sessionId)
+local deleted = exports['Straye Capture']:deleteRecording(sessionId)
 ```
 
 **Example**
 ```lua
-local success = exports['cfx-capture']:deleteRecording('abc123def456')
+local success = exports['Straye Capture']:deleteRecording('abc123def456')
 if success then
     print('Recording deleted')
 end
@@ -289,12 +289,12 @@ end
 Capture a screenshot on the client and receive the data locally.
 
 ```lua
-exports['cfx-capture']:requestScreenshot(options, callback)
+exports['Straye Capture']:requestScreenshot(options, callback)
 ```
 
 **Example**
 ```lua
-exports['cfx-capture']:requestScreenshot({
+exports['Straye Capture']:requestScreenshot({
     encoding = 'jpg',
     quality = 0.92
 }, function(data)
@@ -309,12 +309,12 @@ end)
 Capture a screenshot and upload through the server proxy.
 
 ```lua
-exports['cfx-capture']:requestScreenshotUpload(provider, options, callback)
+exports['Straye Capture']:requestScreenshotUpload(provider, options, callback)
 ```
 
 **Example**
 ```lua
-exports['cfx-capture']:requestScreenshotUpload('fivemanage', {
+exports['Straye Capture']:requestScreenshotUpload('fivemanage', {
     encoding = 'jpg'
 }, function(result)
     local data = json.decode(result)
@@ -333,7 +333,7 @@ end)
 All callbacks receive structured error information when something goes wrong.
 
 ```lua
-exports['cfx-capture']:requestClientScreenshot(source, {}, function(err, data)
+exports['Straye Capture']:requestClientScreenshot(source, {}, function(err, data)
     if err then
         -- err is the error code string
         print('Error code:', err)
@@ -363,14 +363,14 @@ end)
 
 ## Backward Compatibility
 
-CFX-Capture maintains compatibility with screenshot-basic.
+Straye Capture maintains compatibility with screenshot-basic.
 
 ```lua
 -- This event still works
 TriggerServerEvent('screenshot_basic:requestScreenshot', options, url)
 
 -- Legacy export alias
-exports['cfx-capture']:requestClientScreenshotLegacy(...)
+exports['Straye Capture']:requestClientScreenshotLegacy(...)
 ```
 
 ---
