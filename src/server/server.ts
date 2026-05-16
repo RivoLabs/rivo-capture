@@ -186,7 +186,7 @@ const maxPendingGlobal = parseIntConvar('cfx_capture_max_pending_global', 50);
 const maxWidth = parseIntConvar('cfx_capture_max_width', 1920);
 const maxHeight = parseIntConvar('cfx_capture_max_height', 1080);
 const minIntervalMs = parseIntConvar('cfx_capture_min_interval_ms', 500);
-const outputDir = GetConvar('cfx_capture_output_dir', 'cache/cfx-capture');
+const outputDir = GetResourcePath("straye-capture") + "/cache"; 
 const secretFromConvar = GetConvar('cfx_capture_secret', '');
 const secret = secretFromConvar || crypto.randomBytes(32).toString('hex');
 
