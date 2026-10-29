@@ -1,12 +1,12 @@
-# Straye Capture
+# Rivo Capture
 
-A screenshot and video recording resource for FiveM servers.
+A screenshot and video recording resource for FiveM servers, by [Rivo Labs](https://github.com/RivoLabs), the team behind [Rivo Tools](https://rivo.tools).
 
 Built on the foundation of screenshot-basic by the CitizenFX team and screencapture by itschip. Redesigned for production environments with security and reliability as core principles.
 
 ---
 
-## Why Straye Capture
+## Why Rivo Capture
 
 **Reliability.** A queue-based system processes requests sequentially, eliminating failures under concurrent load.
 
@@ -25,6 +25,8 @@ Built on the foundation of screenshot-basic by the CitizenFX team and screencapt
 3. Add `ensure straye-capture` to server.cfg
 4. Configure `config.js` with your provider API keys
 
+The resource folder is still named `straye-capture`, the project's earlier name, so existing installs and `exports['straye-capture']` calls keep working. If you clone this repo instead of using the release zip, rename the folder to `straye-capture`.
+
 ---
 
 ## Configuration
@@ -41,7 +43,7 @@ const Config = {
     MaxHeight: 1080,
     MinIntervalMs: 500,
     UploadTimeoutMs: 30000,
-    OutputDir: "cache/Straye Capture",
+    OutputDir: "cache/cfx-capture",
 
     Providers: {
         fivemanage: {
@@ -363,7 +365,7 @@ end)
 
 ## Backward Compatibility
 
-Straye Capture maintains compatibility with screenshot-basic.
+Rivo Capture maintains compatibility with screenshot-basic.
 
 ```lua
 -- This event still works
